@@ -90,3 +90,10 @@
 .react-datepicker__day-name--range-start::after {
   margin-inline-start: auto;
 } */
+
+.css-bkrceb-MuiButtonBase-root-MuiPickersDay-root.Mui-selected {
+  background-color: red;
+}
+.css-bkrceb-MuiButtonBase-root-MuiPickersDay-root.Mui-selected:hover {
+  background-color: yellow;
+}

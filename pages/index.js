@@ -8,6 +8,7 @@ import TextInput from "../components/TextInput";
 import SelectInput from "../components/Select2";
 import AddReactionIcon from "@mui/icons-material/AddReaction";
 import Calender from "../components/Calender";
+import Date from "../components/Date";
 
 export default function Home() {
   const options = [
@@ -40,7 +41,8 @@ export default function Home() {
           <TextInput />
         </div>
         <div>
-          <Calender label="loan start day" />
+          {/* <Calender label="loan start day" /> */}
+          <Date />
         </div>
       </main>
     </>
