@@ -92,8 +92,8 @@
 } */
 
 .css-bkrceb-MuiButtonBase-root-MuiPickersDay-root.Mui-selected {
-  background-color: red;
+  background-color: red !important;
 }
 .css-bkrceb-MuiButtonBase-root-MuiPickersDay-root.Mui-selected:hover {
-  background-color: yellow;
+  background-color: yellow !important;
 }
