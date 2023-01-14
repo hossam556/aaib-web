@@ -1,25 +1,39 @@
+import React, { useEffect, useState } from "react";
 import Head from "next/head";
-import Image from "next/image";
-import { Inter } from "@next/font/google";
-import styles from "../styles/Home.module.css";
-import Select from "../components/Select";
-import TextInput from "../components/TextInput";
-// import TextField from "@mui/material/TextField";
-import SelectInput from "../components/Select2";
-import AddReactionIcon from "@mui/icons-material/AddReaction";
-import Calender from "../components/Calender";
-import Date from "../components/Date";
+import Users from "../components/users/Users";
+import AddUser from "../components/users/AddUser";
+import Test from "../components/Test";
+import axios from "../utils/axios";
 
-export default function Home() {
-  const options = [
-    { value: "chocolate", label: "Chocolate", icon: <AddReactionIcon /> },
-    { value: "strawberry", label: "Strawberry", icon: <AddReactionIcon /> },
-    { value: "vanilla", label: "Vanilla", icon: <AddReactionIcon /> },
-  ];
+export default function Home({ data }) {
+  const [users, setUsers] = useState(null);
 
-  const selectHanlder = (val) => {
-    console.log(val);
-  };
+  useEffect(() => {
+    // const fetchUsers = () => {
+    //   axios
+    //     .get("http://localhost:3000/api/users")
+    //     .then((data) => setUsers(data.data))
+    //     .catch((err) => {
+    //       console.log("error home");
+    //       console.log(err.message);
+    //     });
+    // };
+    // fetchUsers();
+    // const fetchUsers = () => {
+    //   fetch("http://localhost:3000/api/users")
+    //     .then((res) => res.json())
+    //     .then((data) => setUsers(data))
+    //     .catch((err) => {
+    //       console.log("error home");
+    //       console.log(err.message);
+    //     });
+    // };
+    // fetchUsers();
+  }, []);
+
+  // console.log(users);
+
+  if (!data) return <p>somthing went wrong</p>;
 
   return (
     <>
@@ -29,22 +43,19 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="flex items-center justify-around p-5 w-100">
-        <p className="">hello world</p>
-        <div className="flex items-center">
-          {/* <Select /> */}
-          <SelectInput
-            className="w-[200px]"
-            options={options}
-            onChange={selectHanlder}
-          />
-          <TextInput />
-        </div>
-        <div>
-          {/* <Calender label="loan start day" /> */}
-          <Date />
-        </div>
+      <main className="flex flex-col items-center justify-around p-5 w-100">
+        <Users users={data} comp={<Test />} />
+        <AddUser users={data} setUsers={setUsers} />
       </main>
     </>
   );
+}
+
+export async function getServerSideProps(context) {
+  const { data } = await axios.get("/users");
+  return {
+    props: {
+      data,
+    }, // will be passed to the page component as props
+  };
 }

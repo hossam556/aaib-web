@@ -20,7 +20,7 @@ const Home = ({ data }) => {
 export default Home;
 
 export async function getServerSideProps(context) {
-  const res = await useFetch("/users");
+  const res = await fetch("https://jsonplaceholder.typicode.com/todos/1");
   const data = await res.json();
   return {
     props: { data }, // will be passed to the page component as props
