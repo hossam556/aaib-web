@@ -1,7 +1,16 @@
 import React from "react";
 import Select from "react-select";
 
-const Select2 = ({ withIcon = true, className, options, onChange, label }) => {
+const Select2 = ({
+  withIcon = true,
+  className,
+  options,
+  onChange,
+  label,
+  name,
+  value,
+  placeholder,
+}) => {
   const optionWithPicture = (option) => {
     return (
       <div className="flex items-center">
@@ -14,16 +23,19 @@ const Select2 = ({ withIcon = true, className, options, onChange, label }) => {
   return (
     <div>
       {label && (
-        <label htmlFor="selectInput" className="text-gray-600 block mb-1">
+        <label htmlFor="selectInput" className="block mb-1 text-gray-600">
           {label}
         </label>
       )}
       <Select
         id="selectInput"
+        name={name}
+        value={value}
         className={className}
         instanceId="selectInput"
         options={options}
         onChange={onChange}
+        placeholder
         styles={{
           placeholder: (base) => ({
             ...base,

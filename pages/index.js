@@ -4,21 +4,25 @@ import Users from "../components/users/Users";
 import AddUser from "../components/users/AddUser";
 import Test from "../components/Test";
 import axios from "../utils/axios";
+import Form from "../components/Form";
 
 export default function Home({ data }) {
   const [users, setUsers] = useState(null);
 
   useEffect(() => {
-    // const fetchUsers = () => {
-    //   axios
-    //     .get("http://localhost:3000/api/users")
-    //     .then((data) => setUsers(data.data))
-    //     .catch((err) => {
-    //       console.log("error home");
-    //       console.log(err.message);
-    //     });
-    // };
-    // fetchUsers();
+    const fetchUsers = () => {
+      axios
+        .get("http://localhost:3000/api/users")
+        .then((data) => {
+          console.log("success");
+          setUsers(data.data);
+        })
+        .catch((err) => {
+          console.log("error home");
+          console.log(err.message);
+        });
+    };
+    fetchUsers();
     // const fetchUsers = () => {
     //   fetch("http://localhost:3000/api/users")
     //     .then((res) => res.json())
@@ -44,8 +48,9 @@ export default function Home({ data }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="flex flex-col items-center justify-around p-5 w-100">
-        <Users users={data} comp={<Test />} />
-        <AddUser users={data} setUsers={setUsers} />
+        {/* <Users users={data} comp={<Test />} /> */}
+        {/* <AddUser users={data} setUsers={setUsers} /> */}
+        <Form />
       </main>
     </>
   );
