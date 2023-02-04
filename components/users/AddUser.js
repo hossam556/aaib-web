@@ -17,29 +17,10 @@ const AddUser = ({ users, setUsers }) => {
       newUsers.push(user);
       setUsers(newUsers);
       setName("");
-      //   console.log(res.users);
     } catch (err) {
       console.log("entered error");
       console.log(err);
     }
-    // try {
-    //   const res = await fetch("http://localhost:3000/api/users", {
-    //     method: "POST",
-    //     body: JSON.stringify(body),
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //   });
-    //   const user = await res.json();
-    //   let newUsers = [...users];
-    //   newUsers.push(user);
-    //   setUsers(newUsers);
-    //   setName("");
-    //   console.log("succeed");
-    // } catch (err) {
-    //   console.log("entered error");
-    //   console.log(err);
-    // }
   };
 
   return (
@@ -48,12 +29,11 @@ const AddUser = ({ users, setUsers }) => {
         type="text"
         value={userName}
         placeholder="write userName..."
-        // key={}
         className="p-3 border border-blue-400 rounded-md outline-none"
         onChange={(e) => setName(e.target.value)}
       />
       <button
-        className="mx-2 p-3 outline-none bg-green-400 rounded-md my-2"
+        className="p-3 mx-2 my-2 bg-green-400 rounded-md outline-none"
         onClick={addUser}
       >
         Add User

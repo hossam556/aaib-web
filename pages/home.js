@@ -1,9 +1,29 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useFetch } from "../utils/useFetch";
 import Head from "next/head";
+import Router from "next/router";
+import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import useAxiosPrivate from "../hooks/useAxiosPrivate";
 
-const Home = ({ data }) => {
-  console.log(data);
+const Home = () => {
+  const [employees, setEmployees] = useState(null);
+
+  const axiospriv = useAxiosPrivate();
+
+  // useEffect(() => {
+
+  // }, []);
+
+  const getEmployess = () => {
+    axiospriv
+      .get("/employees")
+      .then((res) => setEmployees(res.data))
+      .catch((err) => err);
+  };
+
+  const isAuthenticated = useSelector((state) => state.login.isAuthenticated);
+
   return (
     <>
       <Head>
@@ -12,17 +32,33 @@ const Home = ({ data }) => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div>Home</div>
+      <div className="flex flex-col items-center justify-center h-screen text-4xl font-bold text-red-500 bg-green-300">
+        Hello user
+        {isAuthenticated && (
+          <div className="w-full mt-10 text-2xl text-center text-blue-500">
+            This appear for Hossam Salem only
+          </div>
+        )}
+        <button
+          onClick={getEmployess}
+          className="px-5 py-4 mt-10 text-lg text-center text-white bg-purple-500 rounded-md"
+        >
+          Get your emploees
+        </button>
+        <div className="flex items-center mt-10">
+          {employees &&
+            employees.map((item) => (
+              <div
+                className="p-4 mx-2 text-lg text-black bg-orange-400 rounded-md"
+                key={item.id}
+              >
+                {item.firstname}
+              </div>
+            ))}
+        </div>
+      </div>
     </>
   );
 };
 
 export default Home;
-
-export async function getServerSideProps(context) {
-  const res = await fetch("https://jsonplaceholder.typicode.com/todos/1");
-  const data = await res.json();
-  return {
-    props: { data }, // will be passed to the page component as props
-  };
-}

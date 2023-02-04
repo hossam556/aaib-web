@@ -8,14 +8,14 @@ const Users = ({ users, comp = "" }) => {
   // console.log("users comp");
 
   return (
-    <div className="flex items-center flex-wrap">
+    <div className="flex flex-wrap items-center gap-5">
       {users?.map((item, i) => (
         <User key={i} user={item} />
       ))}
       {/* <Test /> */}
       {comp}
       <button
-        className="mx-2 p-2 outline-none bg-green-400 rounded-md"
+        className="p-2 mx-2 bg-green-400 rounded-md outline-none"
         onClick={() => setRender((prev) => !prev)}
       >
         Render

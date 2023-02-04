@@ -2,7 +2,7 @@ import React from "react";
 
 const User = ({ user }) => {
   return (
-    <div className="p-8 rounded-md bg-gray-200 text-black mx-3">
+    <div className="w-[100px] h-[100px] flex items-center justify-center text-black bg-gray-200 rounded-md">
       <p>{user.name}</p>
     </div>
   );

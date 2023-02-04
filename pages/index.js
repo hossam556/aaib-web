@@ -5,39 +5,48 @@ import AddUser from "../components/users/AddUser";
 import Test from "../components/Test";
 import axios from "../utils/axios";
 import Form from "../components/Form";
+import axiosPrivate from "../axiosPrivate";
+import router from "next/router";
+import useAxiosPrivate from "../hooks/useAxiosPrivate";
 
-export default function Home({ data }) {
+export default function Home() {
   const [users, setUsers] = useState(null);
+  const axiospriv = useAxiosPrivate();
+
+  // useEffect(() => {
+  //   const fetchUsers = () => {
+  //     axios
+  //       .get("http://localhost:3000/api/users")
+  //       .then((data) => {
+  //         console.log("success");
+  //         setUsers(data.data);
+  //       })
+  //       .catch((err) => {
+  //         console.log("error home");
+  //         console.log(err.message);
+  //       });
+  //   };
+  //   fetchUsers();
+  // }, []);
 
   useEffect(() => {
-    const fetchUsers = () => {
-      axios
-        .get("http://localhost:3000/api/users")
-        .then((data) => {
-          console.log("success");
-          setUsers(data.data);
-        })
-        .catch((err) => {
-          console.log("error home");
-          console.log(err.message);
-        });
-    };
-    fetchUsers();
-    // const fetchUsers = () => {
-    //   fetch("http://localhost:3000/api/users")
-    //     .then((res) => res.json())
-    //     .then((data) => setUsers(data))
-    //     .catch((err) => {
-    //       console.log("error home");
-    //       console.log(err.message);
-    //     });
-    // };
-    // fetchUsers();
+    axiospriv
+      .get("https://jsonplaceholder.typicode.com/todos/1")
+      .then((res) => console.log(res))
+      .catch((err) => err);
   }, []);
 
-  // console.log(users);
+  // const tokenStr =
+  //   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3QiLCJpYXQiOjE2NzU0NjQ2MjEsImV4cCI6MTY3NTQ2NTYyMX0.gQCYmVGmcnDEtrvFGWYAPc9J1Tste8xRpR9zd_hNgTg";
 
-  if (!data) return <p>somthing went wrong</p>;
+  // useEffect(() => {
+  //   axiosPrivate
+  //     .get("http://localhost:3500/refresh", {
+  //       headers: { Authorization: `Bearer ${tokenStr}` },
+  //     })
+  //     .then((res) => console.log(res))
+  //     .catch((err) => err);
+  // }, []);
 
   return (
     <>
@@ -48,19 +57,34 @@ export default function Home({ data }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="flex flex-col items-center justify-around p-5 w-100">
-        {/* <Users users={data} comp={<Test />} /> */}
-        {/* <AddUser users={data} setUsers={setUsers} /> */}
-        <Form />
+        <nav className="flex items-center justify-center">
+          <div>
+            <button
+              className="px-3 py-2 mx-3 mt-3 text-white bg-black rounded-md"
+              onClick={() => router.push("/login")}
+            >
+              Login
+            </button>
+          </div>
+          <div>
+            <button
+              className="px-3 py-2 mt-3 text-white bg-black rounded-md"
+              onClick={() => router.push("/register")}
+            >
+              Register
+            </button>
+          </div>
+        </nav>
       </main>
     </>
   );
 }
 
-export async function getServerSideProps(context) {
-  const { data } = await axios.get("/users");
-  return {
-    props: {
-      data,
-    }, // will be passed to the page component as props
-  };
-}
+// export async function getServerSideProps(context) {
+//   const { data } = await axios.get("/users");
+//   return {
+//     props: {
+//       data,
+//     },
+//   };
+// }
