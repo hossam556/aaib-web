@@ -17,10 +17,14 @@ export const loginSlice = createSlice({
       state.isAuthenticated = true;
       state.token = "testToken";
     },
+    logoutAction: (state, action) => {
+      state.isAuthenticated = false;
+      // state.token = "testToken";
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { loginAction } = loginSlice.actions;
+export const { loginAction, logoutAction } = loginSlice.actions;
 
 export default loginSlice.reducer;

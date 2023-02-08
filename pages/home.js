@@ -1,15 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { useFetch } from "../utils/useFetch";
 import Head from "next/head";
-import Router from "next/router";
+import { useRouter } from "next/router";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
+import { logoutAction } from "../store/reducers/login/login";
 
 const Home = () => {
   const [employees, setEmployees] = useState(null);
 
   const axiospriv = useAxiosPrivate();
+
+  const dispatch = useDispatch();
+
+  const router = useRouter();
 
   // useEffect(() => {
 
@@ -22,7 +27,16 @@ const Home = () => {
       .catch((err) => err);
   };
 
+  const LogoutHandler = () => {
+    localStorage.removeItem("token");
+    dispatch(logoutAction());
+  };
+
   const isAuthenticated = useSelector((state) => state.login.isAuthenticated);
+
+  // if (!isAuthenticated) {
+  //   router?.replace("/login");
+  // }
 
   return (
     <>
@@ -56,6 +70,12 @@ const Home = () => {
               </div>
             ))}
         </div>
+        <button
+          onClick={LogoutHandler}
+          className="px-5 py-4 mt-10 text-lg text-center text-white bg-purple-500 rounded-md"
+        >
+          Logout
+        </button>
       </div>
     </>
   );
