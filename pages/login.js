@@ -3,7 +3,8 @@ import router from "next/router";
 import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import { loginAction } from "../store/reducers/login/login";
-import axiosPrivate from "../axiosPrivate";
+// import axiosPrivate from "../axiosPrivate";
+import axios from "../axios";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -15,7 +16,7 @@ const Login = () => {
       pwd: "",
     },
     onSubmit: (values) => {
-      axiosPrivate
+      axios
         .post("/auth", values)
         .then((res) => {
           console.log(res.data?.accessToken);

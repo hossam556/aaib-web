@@ -29,12 +29,29 @@ export default function Home() {
   //   fetchUsers();
   // }, []);
 
-  useEffect(() => {
-    axiospriv
-      .get("https://jsonplaceholder.typicode.com/todos/1")
-      .then((res) => console.log(res))
-      .catch((err) => err);
-  }, []);
+  // useEffect(() => {
+  //   axiosPrivate
+  //     .get("/guest/atms")
+  //     .then((res) => console.log(res))
+  //     .catch((err) => err);
+  // }, []);
+
+  // useEffect(() => {
+  //   axiosPrivate
+  //     .post("/auth/register", {
+  //       email: "hossam.salem667@gmail.com",
+  //       password: "1994@Barcelona",
+  //     })
+  //     .then((res) => console.log(res))
+  //     .catch((err) => err);
+  // }, []);
+
+  // useEffect(() => {
+  //   axiospriv
+  //     .get("https://jsonplaceholder.typicode.com/todos/1")
+  //     .then((res) => console.log(res))
+  //     .catch((err) => err);
+  // }, []);
 
   // const tokenStr =
   //   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3QiLCJpYXQiOjE2NzU0NjQ2MjEsImV4cCI6MTY3NTQ2NTYyMX0.gQCYmVGmcnDEtrvFGWYAPc9J1Tste8xRpR9zd_hNgTg";
@@ -47,6 +64,29 @@ export default function Home() {
   //     .then((res) => console.log(res))
   //     .catch((err) => err);
   // }, []);
+  let dataa = {
+    name: "hossam",
+    age: 28,
+  };
+
+  const objectToFormData = (object) => {
+    let data = new FormData();
+    for (let i in object) {
+      // if (object[i] && !Array.isArray(object[i])) {
+      if (object[i]) {
+        data.append(i, object[i]);
+      }
+
+      // if (Array.isArray(object[i])) {
+      //   for (let i2 in object[i]) {
+      //     data.append(`${i}[]`, object[i][i2]);
+      //   }
+      // }
+    }
+    return data;
+  };
+
+  console.log(objectToFormData(dataa));
 
   return (
     <>

@@ -1,12 +1,11 @@
-import axiosPrivate from "../axiosPrivate";
+// import axiosPrivate from "../axiosPrivate";
+import axios from "../axios";
 
 const useRefreshToken = () => {
   // const { setAuth } = useAuth();
 
   const refresh = async () => {
-    const response = await axiosPrivate.get("/refresh", {
-      withCredentials: true,
-    });
+    const response = await axios.get("/refresh");
     // setAuth(prev => {
     //     console.log(JSON.stringify(prev));
     //     console.log(response.data.accessToken);
